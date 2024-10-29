@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+{% block title %}{{ parent() }} :: Éditer le souhait{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h2>Édition d'un Souhait</h2>
+                    </div>
+                    <div class="card-body p-4">
+                        {{ form_start(form) }}
+
+                        <div class="form-group mb-3">
+                            {{ form_label(form.title, 'Titre du souhait', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.title) }}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            {{ form_label(form.decription, 'Description', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.decription, {'attr': {'class': 'form-control', 'rows': '4'}}) }}
+                            {{ form_errors(form.decription) }}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            {{ form_label(form.author, 'Auteur', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.author, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.author) }}
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-success px-4">Enregistrer</button>
+                            <a href="{{ path('wish_list') }}" class="btn btn-secondary px-4 ms-2">Annuler</a>
+                        </div>
+
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

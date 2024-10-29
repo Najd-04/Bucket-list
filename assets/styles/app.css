@@ -1,3 +1,51 @@
+/* Fond d'écran bleu ciel */
 body {
     background-color: skyblue;
+}
+
+/* Importer la police Simpsons (ExtraDays.ttf) */
+@font-face {
+    font-family: 'SimpsonsFont';
+    src: url('../fonts/ExtraDays.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Appliquer la police Simpsons à certains éléments */
+body, h1, h2, h3, h4, h5, h6, .navbar-brand {
+    font-family: 'SimpsonsFont', sans-serif;
+}
+
+/* Appliquer la couleur jaune des Simpsons */
+h1, h2, h3, h4, h5, h6, .navbar-brand, .nav-link {
+    color: #FFD90F; /* Jaune Simpsons */
+}
+
+/* Styliser la navbar pour qu'elle soit aussi en jaune Simpsons */
+.navbar {
+    background-color: #FFD90F !important; /* Couleur de fond jaune pour la navbar */
+}
+
+.navbar-brand, .nav-link {
+    color: #000 !important; /* Texte noir pour contraster avec le fond jaune */
+}
+
+.navbar-toggler-icon {
+    background-color: #000; /* Le bouton de toggle en noir pour être visible */
+}
+.navbar-brand img {
+    width: 40px; /* Ajustez la largeur selon vos besoins */
+    height: 40px; /* Hauteur fixe */
+    margin-right: 10px; /* Espacement entre l'image et le texte */
+}
+.navbar img {
+    width: 90px; /* Largeur souhaitée */
+    height: 90px; /* Hauteur souhaitée */
+    margin-right: 10px; /* Espacement entre les images et le texte */
+}
+.image-container {
+    background-color: #FFD90F; /* Couleur jaune Simpsons */
+    display: inline-block; /* Permet de prendre seulement la place nécessaire */
+    padding: 5px; /* Espacement autour de l'image */
+    border-radius: 5px; /* Arrondir légèrement les coins, optionnel */
 }

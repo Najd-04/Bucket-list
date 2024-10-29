@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail du Souhait{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h1>Détail du Souhait ✅</h1>
+            </div>
+
+            <div class="card-body">
+                <h2 class="card-title">🍩 {{ wish.title }}</h2>
+                <p class="card-text">Description : {{ wish.decription }}</p>
+                <p class="card-text">Ajouté le : {{ wish.dateCreated|date('d/m/Y') }}</p>
+                <p class="card-text">ID du souhait : {{ wish.id }}</p>
+                <a href="{{ path('wish_list') }}" class="btn btn-primary">Retour à la liste</a>
+
+                <h3>Commentaires</h3>
+                {% for commentaire in wish.commentaires %}
+                    <div class="comment">
+                        <p><strong>{{ commentaire.author.email }}:</strong> {{ commentaire.content }}</p>
+                        <p>Note: {{ commentaire.rating }} ⭐️</p>
+
+                        {% if commentaire.author == app.user or is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('commentaire_edit', {id: commentaire.id}) }}" class="btn btn-warning">Modifier</a>
+                            <form action="{{ path('commentaire_delete', {id: commentaire.id}) }}" method="post" class="d-inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?');">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ commentaire.id) }}">
+                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                    <hr>
+                {% endfor %}
+
+                <h3>Ajouter un commentaire</h3>
+                <form action="{{ path('commentaire_create', {wishId: wish.id}) }}" method="post">
+                    <div class="mb-3">
+                        <textarea name="content" class="form-control" rows="3" required placeholder="Votre commentaire..."></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rating">Note :</label>
+                        <input type="number" name="rating" class="form-control" min="1" max="5" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Ajouter</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

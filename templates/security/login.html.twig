@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h2>Se Connecter</h2>
+                    </div>
+                    <div class="card-body p-4">
+                        <!-- Affichage du message d'erreur si connexion échouée -->
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+
+                        <!-- Message si l'utilisateur est déjà connecté -->
+                        {% if app.user %}
+                            <div class="alert alert-info">
+                                Vous êtes connecté en tant que {{ app.user.userIdentifier }}.
+                                <a href="{{ path('app_logout') }}" class="btn btn-link">Se déconnecter</a>
+                            </div>
+                        {% endif %}
+
+                        <form method="post">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Email</label>
+                                <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Mot de passe</label>
+                                <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
+                            </div>
+
+                            <!-- Jeton CSRF -->
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+{#                             Option de "Se souvenir de moi" - à activer si souhaité #}
+
+                            <div class="form-check mb-3">
+                                <input type="checkbox" name="_remember_me" id="_remember_me" class="form-check-input">
+                                <label for="_remember_me" class="form-check-label">Se souvenir de moi</label>
+                            </div>
+
+
+                            <div class="text-center mt-4">
+                                <button class="btn btn-success btn-lg px-5" type="submit">Se connecter</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste de Souhaits d'Homer{% endblock %}
+
+{% block body %}
+
+    <div class="example-wrapper">
+        <h1>Liste de Souhaits d'Homer Simpson ✅</h1>
+
+
+
+        <p>Voici quelques rêves qu'Homer Simpson aimerait réaliser :</p>
+
+        <ul>
+            {% for wish in wishes %}
+                <li>
+                    <a href="{{ path('wish_detail', {id: wish.id}) }}">
+                        🍩 {{ wish.title }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <p>Qu'est-ce qui va s'ajouter à la liste de souhaits d'Homer ? Seul le temps (et les donuts) nous le dira ! 🍩</p>
+    </div>
+
+{% endblock %}

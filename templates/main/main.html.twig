@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MainController!{% endblock %}
+
+{% block body %}
+
+  <h1>Welcome to Homer's Bucket List</h1>
+
+  {% if app.user %}
+    <h2>Welcome back, {{ app.user.email }}!</h2>
+  {% else %}
+    <h2>Please log in to see your wishes!</h2>
+  {% endif %}
+
+{% endblock %}
